@@ -29,10 +29,7 @@ SECRET_KEY = 'nrn^r9(0naq$782cj*8k_$oi9h3c#(6qpg-l+^zg$+crfw$3d6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    #'192.168.101.207',
-    #'localhost'
-]
+ALLOWED_HOSTS = ['legendarybarberapp.herokuapp.com']
 
 
 # Application definition
