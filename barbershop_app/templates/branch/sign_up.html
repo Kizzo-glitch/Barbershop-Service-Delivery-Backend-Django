@@ -1,0 +1,15 @@
+{% extends 'base_signup.html' %}
+{% load bootstrap3 %}
+
+{% block title %}Sign In{% endblock %}
+{% block heading %}Branch - Sign UP{% endblock %}
+
+{% block content %}
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% bootstrap_form manager_form %}
+      {% bootstrap_form branch_form %}
+      <button type="submit" class="btn btn-pink pull-right">Sign Up</button>
+    </form>
+    <a href="{% url 'login' %}">Already have an account?</a>
+{% endblock %}

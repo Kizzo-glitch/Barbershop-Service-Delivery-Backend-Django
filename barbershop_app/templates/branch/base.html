@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %} Branch {% endblock %}
+
+{% block script %}
+    <script>
+        $(document).ready(function() {
+            var now = new Date();
+            setInterval(function() {
+                $.ajax({
+                    url: '/api/booking/notification/' + now.toISOString() + '/',
+                    method: 'GET',
+                    success: function(data) {
+                        if (data['notification'] === 0) {
+                            $('.badge').text('');
+                        } else {
+                            $('.badge').text(data['notification']);
+                        }
+                    }
+                })
+            }, 3000)
+        })
+
+    </script>
+{% endblock %}
+
+
+{% block sidebar %}
+
+    {% url 'booking' as branch_order_url %}
+    {% url 'service' as branch_service_url %}
+    {% url 'report' as branch_report_url %}
+    {% url 'account' as branch_account_url %}
+
+    <div class="text-center">
+      <img class="img-circle" src="{{ MEDIA_URL }}{{ request.user.branch.logo }}"
+          width="70" height="70" />
+      <br/>
+      <br/>
+      <h4>Hi, {{ request.user.get_full_name }}</h4>
+      <h5>{{ request.user.branch.name }}</h5>
+    </div>
+
+    <div class="list-group">
+      <span class="text-uppercase">Dashboard</span>
+
+        <a href="{% url 'booking' %}"
+           class="list-group-item {% if request.path == branch_booking_url %} active {% endif %} ">
+            Bookings
+            <span class="badge"></span>
+        </a>
+        <a href="{% url 'service' %}"
+           class="list-group-item {% if request.path == branch_service_url %} active {% endif %} ">Services</a>
+        <a href="{% url 'report' %}"
+           class="list-group-item {% if request.path == branch_report_url %} active {% endif %} ">Reports</a>
+
+        <span class="text-uppercase">Profile</span>
+        <a href="{% url 'account' %}" class="list-group-item">Account</a>
+    </div>
+        <div class="text-center">
+        <a href="{% url 'logout' %}?next={{ request.path }}"
+            class="btn btn-pink">Logout</a>
+    </div>
+
+{% endblock %}

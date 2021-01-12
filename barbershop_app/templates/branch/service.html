@@ -1,0 +1,45 @@
+{% extends 'branch/base.html' %}
+
+{% block page %}
+
+<div class="panel" xmlns="http://www.w3.org/1999/html">
+        <div class="panel-heading bg-blue">
+            <h4 class="panel-title text-center text-white">Services</h4>
+        </div>
+        <div class="panel-body">
+            <div class="text-right">
+                <a href="{% url 'add-service' %}" class="btn btn-primary">Add Service</a>
+                <br/>
+                <br/>
+            </div>
+
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                  <tr class="bg-gray text-white">
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Short Description</th>
+                    <th>Price</th>
+                    <th class="text-center">Image</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for service in services %}
+                        <tr>
+                          <td scope="row">{{ service.id }}</td>
+                          <td><a href="{% url 'edit-service' service.id %}">{{ service.name  }}</a></td>
+                          <td>{{ service.short_description }}</td>
+                          <td>{{ service.price }}</td>
+                          <td class="text-center"><img class="img-rounded"
+                              src="{{ MEDIA_URL }}{{ service.image }}" width="50" height="50"></td>
+                          <td><a href="{% url 'delete-service' service.pk %}" ><button type=""
+                                                                                       class="btn btn-danger btn-sm mt-1 mb-1">Delete</button>>{{ service.delete }}</a></td>
+                        </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
