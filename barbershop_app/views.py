@@ -19,7 +19,7 @@ def home(request):
 
 @login_required(login_url='/sign_in/')
 def branch_home(request):
-    return redirect(branch_booking)
+    return redirect(branch_account)
 
 
 @login_required(login_url='/sign_in/')
